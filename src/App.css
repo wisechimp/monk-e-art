@@ -5,10 +5,22 @@
   text-align: center;
 }
 
+.header {
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+}
+
 .customTitle {
   color: white;
   margin: 0;
   padding: 1em 1em 0.5em 1em;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
 }
 
 .userInputContainer {
@@ -20,7 +32,6 @@
 }
 
 .userInput {
-  margin-bottom: 1em;
   padding: 0.5em;
 }
 
@@ -30,4 +41,17 @@
 
 .monkeyImage {
   width: 80%;
+}
+
+.userHelpText {
+  color: white;
+  margin: 0;
+  padding: 0.5em 0;
+}
+
+.userInfoText {
+  color: white;
+  font-style: italic;
+  margin: 0;
+  padding: 0.5em 0;
 }
