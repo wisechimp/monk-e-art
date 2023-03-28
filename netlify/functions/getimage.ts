@@ -1,14 +1,7 @@
-import { Handler, HandlerContext, HandlerEvent } from "@netlify/functions"
+import { Handler, HandlerEvent } from "@netlify/functions"
 import { Configuration, OpenAIApi } from "openai"
 
-const handler: Handler = async (
-  event: HandlerEvent,
-  context: HandlerContext
-) => {
-  console.log("Event is: " + JSON.stringify(event))
-  console.log("Giving some context: " + JSON.stringify(context))
-  console.log("RawQuery: " + event.rawQuery)
-
+const handler: Handler = async (event: HandlerEvent) => {
   const openai = new OpenAIApi(
     new Configuration({
       apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -17,12 +10,9 @@ const handler: Handler = async (
 
   const { prompt } = event.queryStringParameters!
 
-  console.log("Prompt is: " + prompt)
-  console.log("What's openai up to: " + JSON.stringify(openai))
-
   let imageUrl = ""
   try {
-    console.log("This is trying")
+    console.log("This is trying. The prompt is: " + prompt)
     if (typeof prompt === "string") {
       const response = await openai.createImage({
         prompt: prompt!,
