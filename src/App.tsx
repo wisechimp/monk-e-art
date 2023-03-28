@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
 
 import constantValues from "./constants/constantValues"
-import generateImage from "./helpers/generateImage"
 import Avatar from "./images/salvator-monke-tm.png"
 import "./App.css"
 
@@ -34,14 +33,21 @@ const App = () => {
   }, [textInput, buttonDisabled, minimumPromptLength])
 
   useEffect(() => {
-    if (textEntered) {
-      generateImage(textInput).then((data) => {
-        setImageUrl(data!)
-      })
-      setTextEntered(false)
-    } else {
-      return
+    const fetchGeneratedImage = async () => {
+      if (textEntered) {
+        const url = `/api/getimage?prompt=${textInput}`
+        try {
+          const generatedImageUrl = await fetch(url).then((res) => res.json())
+          setImageUrl(generatedImageUrl.imageUrl)
+          setTextEntered(false)
+        } catch (error) {
+          console.log(error)
+        }
+      } else {
+        return
+      }
     }
+    fetchGeneratedImage()
   }, [textInput, textEntered])
 
   return (
